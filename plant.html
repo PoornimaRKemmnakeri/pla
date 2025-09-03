@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Plant Quiz 🌱</title>
+  <title>Plant Quiz </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -42,7 +42,7 @@
 </head>
 <body>
 
-  <h1>🌿 Plant Quiz 🌿</h1>
+  <h1> Plant Quiz </h1>
 
   <div id="previousScore"></div>
 
@@ -79,7 +79,7 @@
     const storedScore = localStorage.getItem("plantQuizScore");
     if (storedScore !== null) {
       document.getElementById("previousScore").innerText = 
-        "🌟 Your last score was: " + storedScore + " out of 3";
+        "Your last score was: " + storedScore + " out of 3";
     }
 
     function nextQuestion(current) {
@@ -108,10 +108,11 @@
       // Show result and confirmation
       document.getElementById("quizForm").style.display = "none";
       document.getElementById("result").innerHTML = 
-        "✅ You scored " + score + " out of 3!<br><br>" +
-        "📦 Your data is stored successfully.";
+        " You scored " + score + " out of 3!<br><br>" +
+        " Your data is stored successfully.";
     }
   </script>
 
 </body>
 </html>
+
