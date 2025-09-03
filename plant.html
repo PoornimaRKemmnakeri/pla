@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plant Quiz 🌱</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0fff0;
+      text-align: center;
+      padding: 30px;
+    }
+    .question {
+      display: none;
+      margin: 20px 0;
+    }
+    .question.active {
+      display: block;
+    }
+    button {
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #3cb371;
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      color: #006400;
+    }
+    #previousScore {
+      margin-top: 10px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌿 Plant Quiz 🌿</h1>
+
+  <div id="previousScore"></div>
+
+  <form id="quizForm">
+    <div class="question active" id="q1">
+      <p>1. Which part of the plant conducts photosynthesis?</p>
+      <input type="radio" name="q1" value="a"> Root<br>
+      <input type="radio" name="q1" value="b"> Stem<br>
+      <input type="radio" name="q1" value="c"> Leaf<br>
+      <button type="button" onclick="nextQuestion(1)">Next</button>
+    </div>
+
+    <div class="question" id="q2">
+      <p>2. What gas do plants absorb from the air?</p>
+      <input type="radio" name="q2" value="a"> Oxygen<br>
+      <input type="radio" name="q2" value="b"> Carbon Dioxide<br>
+      <input type="radio" name="q2" value="c"> Nitrogen<br>
+      <button type="button" onclick="nextQuestion(2)">Next</button>
+    </div>
+
+    <div class="question" id="q3">
+      <p>3. Which plant grows in water?</p>
+      <input type="radio" name="q3" value="a"> Cactus<br>
+      <input type="radio" name="q3" value="b"> Lotus<br>
+      <input type="radio" name="q3" value="c"> Rose<br>
+      <button type="button" onclick="submitQuiz()">Submit</button>
+    </div>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    // Show previous score if available
+    const storedScore = localStorage.getItem("plantQuizScore");
+    if (storedScore !== null) {
+      document.getElementById("previousScore").innerText = 
+        "🌟 Your last score was: " + storedScore + " out of 3";
+    }
+
+    function nextQuestion(current) {
+      document.getElementById("q" + current).classList.remove("active");
+      document.getElementById("q" + (current + 1)).classList.add("active");
+    }
+
+    function submitQuiz() {
+      const answers = {
+        q1: "c",
+        q2: "b",
+        q3: "b"
+      };
+      let score = 0;
+
+      for (let key in answers) {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected && selected.value === answers[key]) {
+          score++;
+        }
+      }
+
+      // Store score in localStorage
+      localStorage.setItem("plantQuizScore", score);
+
+      // Show result and confirmation
+      document.getElementById("quizForm").style.display = "none";
+      document.getElementById("result").innerHTML = 
+        "✅ You scored " + score + " out of 3!<br><br>" +
+        "📦 Your data is stored successfully.";
+    }
+  </script>
+
+</body>
+</html>
